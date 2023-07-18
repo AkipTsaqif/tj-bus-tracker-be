@@ -70,4 +70,13 @@ app.post("/transjakarta/operators", async (req, res) => {
         });
 });
 
+app.get("/kci/krl-d1", async (req, res) => {
+    await axios
+        .get("http://info.krl.co.id/tracking/gettrain")
+        .then((resp) => {
+            res.status(418).json(resp.data);
+        })
+        .catch((error) => res.status(500).json(error));
+});
+
 app.listen(port, () => console.log(`http://localhost:${port}/`));
