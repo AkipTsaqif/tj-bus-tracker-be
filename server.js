@@ -20,7 +20,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.post("/", async (req, res) => {
+app.post("/transjakarta/operators", async (req, res) => {
     const bodyData = { ...req.body };
 
     var formData = new FormData();
