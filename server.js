@@ -20,7 +20,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.post("/tj/operator-location", async (req, res) => {
+app.post("/", async (req, res) => {
     const bodyData = { ...req.body };
 
     var formData = new FormData();
@@ -70,4 +70,4 @@ app.post("/tj/operator-location", async (req, res) => {
         });
 });
 
-app.listen(port, () => console.log(`http://localhost:${port}`));
+app.listen(port, () => console.log(`http://localhost:${port}/`));
