@@ -4,6 +4,7 @@ const { default: axios } = require("axios");
 const https = require("https");
 const FormData = require("form-data");
 const jsdom = require("jsdom");
+const _ = require("lodash");
 
 const app = express();
 const port = 3001;
@@ -71,12 +72,39 @@ app.post("/transjakarta/operators", async (req, res) => {
 });
 
 app.get("/kci/krl-d1", async (req, res) => {
-    await axios
-        .get("http://info.krl.co.id/tracking/gettrain")
-        .then((resp) => {
-            res.status(200).json(resp.data);
-        })
-        .catch((error) => res.status(500).json(error));
+    const getTrainDetail = async (nokaArray) => {
+        const promises = nokaArray.map((noka) => {
+            return axios.post(
+                "https://access.kci.id/api/v1/gateway/access/train/schedule-code",
+                { train_no: noka }
+            );
+        });
+
+        try {
+            const responses = await Promise.all(promises);
+            return responses.map((response) => response.data);
+        } catch (error) {
+            console.error("Error making API requests:", error.message);
+            return [];
+        }
+    };
+
+    try {
+        const locationAPI = await axios.get(
+            "http://info.krl.co.id/tracking/gettrain"
+        );
+
+        const trainLocation = locationAPI.data;
+        const noka = _.map(trainLocation, "noka");
+        const trainDetailData = await getTrainDetail(noka);
+
+        res.status(200).json({
+            location: trainLocation,
+            detail: trainDetailData,
+        });
+    } catch (error) {
+        res.status(500).json(error);
+    }
 });
 
 app.listen(port, () => console.log(`http://localhost:${port}/`));
