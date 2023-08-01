@@ -1,4 +1,4 @@
-export const stations = [
+const stations = [
     {
         name: "Pondok Jati",
         lat: "-6.209230512522528",
@@ -70,3 +70,5 @@ export const stations = [
         lon: "106.99923356757853",
     },
 ];
+
+module.exports = stations;
