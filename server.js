@@ -5,6 +5,7 @@ const https = require("https");
 const FormData = require("form-data");
 const jsdom = require("jsdom");
 const _ = require("lodash");
+const stations = require("./utilities/stations");
 
 const app = express();
 const port = 3001;
@@ -105,6 +106,10 @@ app.get("/kci/krl-d1", async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
+});
+
+app.get("/kci/stations", (req, res) => {
+    res.status(200).json(stations);
 });
 
 app.listen(port, () => console.log(`http://localhost:${port}/`));
