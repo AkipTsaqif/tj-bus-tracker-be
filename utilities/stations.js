@@ -1,5 +1,23 @@
 const stations = [
     {
+        name: "Tanjung Priuk",
+        code: "TPK",
+        lat: "-6.110772412191094",
+        lon: "106.88137259711358",
+    },
+    {
+        name: "Ancol",
+        code: "AC",
+        lat: "-6.128086406641496",
+        lon: "106.84518092173775",
+    },
+    {
+        name: "Jakarta Kota",
+        code: "JAKK",
+        lat: "-6.1376049269518775",
+        lon: "106.81456659465675",
+    },
+    {
         name: "Pondok Jati",
         code: "POK",
         lat: "-6.209230512522528",
@@ -40,6 +58,54 @@ const stations = [
         code: "KPB",
         lat: "-6.132721365587152",
         lon: "106.82867039028369",
+    },
+    {
+        name: "Angke",
+        code: "AK",
+        lat: "-6.1446986224569144",
+        lon: "106.80073803268559",
+    },
+    {
+        name: "Duri",
+        code: "DU",
+        lat: "-6.155396240452842",
+        lon: "106.80134455230048",
+    },
+    {
+        name: "Tanahabang",
+        code: "THB",
+        lat: "-6.185693159316926",
+        lon: "106.81086295211597",
+    },
+    {
+        name: "Karet",
+        code: "KAT",
+        lat: "-6.200746797134858",
+        lon: "106.81592302502106",
+    },
+    {
+        name: "Sudirman Baru",
+        code: "SUDB",
+        lat: "-6.2015814290815365",
+        lon: "106.81983971353762",
+    },
+    {
+        name: "Sudirman",
+        code: "SUD",
+        lat: "-6.202435082260232",
+        lon: "106.82361209121555",
+    },
+    {
+        name: "Manggarai",
+        code: "MRI",
+        lat: "-6.210070124731691",
+        lon: "106.85006565568152",
+    },
+    {
+        name: "Matraman",
+        code: "MTR",
+        lat: "-6.21230706948505",
+        lon: "106.86005035186007",
     },
     {
         name: "Jatinegara",
