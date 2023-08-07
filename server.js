@@ -108,6 +108,17 @@ app.get("/kci/krl-d1", async (req, res) => {
     }
 });
 
+app.post("/kci/station-timetable", async (req, res) => {
+    const bodyData = { ...req.body };
+
+    const stationTimetable = await axios.post(
+        "https://access.kci.id/api/v1/gateway/access/train/realtime",
+        bodyData
+    );
+
+    res.status(200).json(stationTimetable.data);
+});
+
 app.get("/kci/stations", (req, res) => {
     res.status(200).json(stations);
 });
