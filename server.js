@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.post("/transjakarta/operators", async (req, res) => {
+app.post("/api/transjakarta/operators", async (req, res) => {
     const bodyData = { ...req.body };
 
     var formData = new FormData();
@@ -72,7 +72,7 @@ app.post("/transjakarta/operators", async (req, res) => {
         });
 });
 
-app.get("/kci/krl-d1", async (req, res) => {
+app.get("/api/kci/krl-d1", async (req, res) => {
     const getTrainDetail = async (nokaArray) => {
         const promises = nokaArray.map((noka) => {
             return axios.post(
@@ -108,7 +108,7 @@ app.get("/kci/krl-d1", async (req, res) => {
     }
 });
 
-app.post("/kci/station-timetable", async (req, res) => {
+app.post("/api/kci/station-timetable", async (req, res) => {
     const bodyData = { ...req.body };
 
     const stationTimetable = await axios.post(
@@ -119,8 +119,25 @@ app.post("/kci/station-timetable", async (req, res) => {
     res.status(200).json(stationTimetable.data);
 });
 
-app.get("/kci/stations", (req, res) => {
+app.get("/api/kci/stations", (req, res) => {
     res.status(200).json(stations);
+});
+
+app.get("/api/changelog", async (req, res) => {
+    try {
+        const commitsResponse = await axios.get(
+            "https://api.github.com/repos/akiptsaqif/tj-bus-tracker/commits",
+            {
+                headers: {
+                    Authorization: "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",
+                },
+            }
+        );
+
+        res.status(200).json(commitsResponse.data);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 app.listen(port, () => console.log(`http://localhost:${port}/`));
