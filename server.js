@@ -123,6 +123,17 @@ app.get("/api/kci/stations", (req, res) => {
     res.status(200).json(stations);
 });
 
+app.post("/api/kci/train-timetable", async (req, res) => {
+    const bodyData = { ...req.body };
+
+    const trainTimetable = await axios.post(
+        "https://access.kci.id/api/v1/gateway/access/train/schedule-code",
+        bodyData
+    );
+
+    res.status(200).json(trainTimetable.data);
+});
+
 app.get("/api/changelog", async (req, res) => {
     try {
         const commitsResponse = await axios.get(
