@@ -52,4 +52,4 @@ const paths = {
     ],
 };
 
-module.exports = stations;
+module.exports = paths;
