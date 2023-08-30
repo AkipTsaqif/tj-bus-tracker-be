@@ -6,6 +6,7 @@ const FormData = require("form-data");
 const jsdom = require("jsdom");
 const _ = require("lodash");
 const stations = require("./utilities/stations");
+const paths = require("./utilities/paths");
 
 const app = express();
 const port = 3001;
@@ -121,6 +122,10 @@ app.post("/api/kci/station-timetable", async (req, res) => {
 
 app.get("/api/kci/stations", (req, res) => {
     res.status(200).json(stations);
+});
+
+app.get("/api/paths", (req, res) => {
+    res.status(200).json(paths);
 });
 
 app.post("/api/kci/train-timetable", async (req, res) => {
