@@ -52,4 +52,4 @@ const paths = {
     ],
 };
 
-export default paths;
+module.exports = stations;
