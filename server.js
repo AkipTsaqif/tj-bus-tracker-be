@@ -105,7 +105,11 @@ app.get("/api/kci/krl-d1", async (req, res) => {
             detail: trainDetailData,
         });
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({
+            message: error.message,
+            code: error.code,
+            status: 500,
+        });
     }
 });
 
