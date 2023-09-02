@@ -113,7 +113,7 @@ app.post("/api/kci/train-position", async (req, res) => {
     const bodyData = { ...req.body };
 
     const trainPosition = await axios.post(
-        "https://access.kci.id/api/v1/gateway/access/train/schedule-code",
+        "https://access.kci.id/api/v1/gateway/access/train/realtime-train",
         bodyData
     );
 
