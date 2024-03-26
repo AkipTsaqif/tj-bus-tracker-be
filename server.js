@@ -75,33 +75,50 @@ app.post("/api/transjakarta/operators", async (req, res) => {
 
 app.get("/api/kci/krl-d1", async (req, res) => {
     const getTrainDetail = async (nokaArray) => {
-        const promises = nokaArray.map((noka) => {
-            return axios.post(
-                "https://access.kci.id/api/v1/gateway/access/train/schedule-code",
-                { train_no: noka }
-            );
-        });
+        console.log("noka");
+        if (nokaArray.length !== 0) {
+            const promises = nokaArray.map((noka) => {
+                return axios.post(
+                    "https://access.kci.id/api/v1/gateway/access/train/schedule-code",
+                    { train_no: noka }
+                );
+            });
 
-        try {
-            const responses = await Promise.all(promises);
-            return responses.map((response) => response.data);
-        } catch (error) {
-            console.error("Error making API requests:", error.message);
-            return [];
+            try {
+                const responses = await Promise.all(promises);
+                return responses.map((response) => response.data);
+            } catch (error) {
+                console.error("Error making API requests:", error.message);
+                return [];
+            }
         }
     };
 
     try {
-        const locationAPI = await axios.get(
-            "http://info.krl.co.id/tracking/gettrain"
-        );
+        // const locationAPI = await axios.get(
+        //     "http://info.krl.co.id/tracking/gettrain"
+        // );
 
-        const trainLocation = locationAPI.data;
-        const noka = _.map(trainLocation, "noka");
+        // const trainLocation = locationAPI.data;
+        // const noka = _.map(trainLocation, "noka");
+        const noka = [
+            "1201B",
+            "1211B",
+            "1200B",
+            "1220B",
+            "1510B",
+            "1681",
+            "5062",
+            "1687",
+            "D1/4025A",
+            "5525",
+        ];
         const trainDetailData = await getTrainDetail(noka);
 
+        console.log(trainDetailData);
+
         res.status(200).json({
-            location: trainLocation,
+            location: null,
             detail: trainDetailData,
         });
     } catch (error) {
